@@ -1,0 +1,60 @@
+{
+  "loader": {
+    "loading_message": "Загрузка…"
+  },
+  "header": {
+    "location": {
+      "country_code_unknown": "Н/Д",
+      "city_unknown": "Неизвестно",
+      "placeholder": "Поиск города",
+      "no_option_message": "Нету вариантов"
+    }
+  },
+  "main": {
+    "current_main_forecast_weather_details": {
+      "feel_like": "Чувствуется как"
+    },
+    "current_first_forecast_weather_details": {
+      "cloudiness": "Облачность",
+      "atmospheric_pressure": "Атмосферное давление",
+      "hPa": "гПа",
+      "min_daily": "Минимальная"
+    },
+    "current_second_forecast_weather_details": {
+      "humidity": "Влажность",
+      "wind_speed": "Скорость ветра",
+      "meter_sec": "метр/сек",
+      "miles_hour": "миль/час",
+      "max_daily": "Максимальная"
+    }
+  },
+  "images": {
+    "alt_current_weather_icon": "Значок текущей погоды",
+    "alt_week_day_weather_icon": "Значок погоды на день недели"
+  },
+  "errors": {
+    "geo_not_supported": "Геолокация не поддерживается вашим браузером",
+    "failed_to_load_current_weather_forecast": "Не удалось загрузить данные текущего прогноза погоды!",
+    "failed_to_load_current_week_days_weather_forecast": "Не удалось загрузить данные прогноза погоды на текущую неделю!"
+  },
+  "days_of_week": {
+    "full_name_of_the_days_of_the_week": {
+      "sunday": "Воскресенье",
+      "monday": "Понедельник",
+      "tuesday": "Вторник",
+      "wednesday": "Среда",
+      "thursday": "Четверг",
+      "friday": "Пятница",
+      "saturday": "Суббота"
+    },
+    "short_name_of_the_days_of_the_week": {
+      "sun": "ВС",
+      "mon": "ПН",
+      "tue": "ВТ",
+      "wed": "СР",
+      "thu": "ЧТ",
+      "fri": "ПТ",
+      "sat": "СБ"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.sidebar {
+  @apply lg:hidden fixed bottom-0 left-0 w-full h-0 flex justify-center items-center bg-indigo-950/60 rounded-t-xl transition-[height] duration-300 ease-in-out overflow-hidden;
+}
+
+.sidebar.open {
+  @apply h-[30%];
+}
+
+.sidebar-toggle {
+  @apply fixed bottom-0 left-1/2 z-50 cursor-pointer;
+}
+
+.sidebar-toggle.open {
+  @apply bottom-[30%] rotate-180;
+}
+
+.sidebar-content {
+  @apply flex flex-col justify-center items-center p-3;
+}

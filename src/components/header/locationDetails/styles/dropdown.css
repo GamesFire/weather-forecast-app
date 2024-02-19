@@ -1,0 +1,19 @@
+.current-container {
+  @apply md:relative select-none;
+}
+
+.current-value {
+  @apply flex items-center justify-center cursor-pointer;
+}
+
+.dropdown-container {
+  @apply md:absolute left-0 top-7 6xl:top-12 w-full transition-all duration-300;
+}
+
+.dropdown-icon {
+  @apply ml-3 text-sm lg:text-base 6xl:text-xl rotate-90 transition-all duration-300;
+}
+
+.dropdown-icon.active {
+  @apply rotate-0;
+}

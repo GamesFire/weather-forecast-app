@@ -1,0 +1,60 @@
+{
+  "loader": {
+    "loading_message": "Завантаження…"
+  },
+  "header": {
+    "location": {
+      "country_code_unknown": "Н/Д",
+      "city_unknown": "Невідомо",
+      "placeholder": "Шукати місто",
+      "no_option_message": "Немає варіантів"
+    }
+  },
+  "main": {
+    "current_main_forecast_weather_details": {
+      "feel_like": "Відчувається як"
+    },
+    "current_first_forecast_weather_details": {
+      "cloudiness": "Хмарність",
+      "atmospheric_pressure": "Атмосферний тиск",
+      "hPa": "гПа",
+      "min_daily": "Мінімальна"
+    },
+    "current_second_forecast_weather_details": {
+      "humidity": "Вологість",
+      "wind_speed": "Швидкість вітру",
+      "meter_sec": "метр/сек",
+      "miles_hour": "миль/год",
+      "max_daily": "Максимальна"
+    }
+  },
+  "images": {
+    "alt_current_weather_icon": "Іконка поточної погоди",
+    "alt_week_day_weather_icon": "Іконка погоди на день тижня"
+  },
+  "errors": {
+    "geo_not_supported": "Геолокація не підтримується вашим браузером.",
+    "failed_to_load_current_weather_forecast": "Не вдалося завантажити дані поточного прогнозу погоди!",
+    "failed_to_load_current_week_days_weather_forecast": "Не вдалося завантажити дані прогнозу погоди на поточний тиждень!"
+  },
+  "days_of_week": {
+    "full_name_of_the_days_of_the_week": {
+      "sunday": "Неділя",
+      "monday": "Понеділок",
+      "tuesday": "Вівторок",
+      "wednesday": "Середа",
+      "thursday": "Четверг",
+      "friday": "П'ятниця",
+      "saturday": "Субота"
+    },
+    "short_name_of_the_days_of_the_week": {
+      "sun": "НД",
+      "mon": "ПН",
+      "tue": "ВТ",
+      "wed": "СР",
+      "thu": "ЧТ",
+      "fri": "ПТ",
+      "sat": "СБ"
+    }
+  }
+}

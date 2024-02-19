@@ -1,0 +1,23 @@
+.switch-button {
+  @apply overflow-hidden w-24 lg:w-32 6xl:w-40 text-center relative pr-12 lg:pr-16 6xl:pr-20 rounded-full bg-indigo-950/60 before:content-["\00b0_F"] before:absolute before:w-12 lg:before:w-16 6xl:before:w-20 before:flex before:items-center before:justify-center before:z-[3] before:pointer-events-none before:right-0 before:inset-y-0;
+}
+
+.switch-button-checkbox {
+  @apply cursor-pointer absolute w-full h-full opacity-0 z-[2] left-0 inset-y-0;
+}
+
+.switch-button-checkbox:checked + .switch-button-label:before {
+  @apply translate-x-12 lg:translate-x-16 6xl:translate-x-20 transition-transform duration-300 ease-linear;
+}
+
+.switch-button-checkbox + .switch-button-label {
+  @apply relative block select-none pointer-events-none px-0 py-2 before:content-[""] before:h-full before:w-full before:absolute before:translate-x-0 before:transition-transform before:duration-300 before:rounded-full before:left-0 before:top-0;
+}
+
+.switch-button-checkbox + .switch-button-label:before {
+  @apply bg-indigo-950;
+}
+
+.switch-button-checkbox + .switch-button-label .switch-button-label-span {
+  @apply relative;
+}

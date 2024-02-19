@@ -1,0 +1,60 @@
+{
+  "loader": {
+    "loading_message": "Chargement…"
+  },
+  "header": {
+    "location": {
+      "country_code_unknown": "N/A",
+      "city_unknown": "Inconnu",
+      "placeholder": "Recherche de ville",
+      "no_option_message": "Aucune option"
+    }
+  },
+  "main": {
+    "current_main_forecast_weather_details": {
+      "feel_like": "C'est comme si"
+    },
+    "current_first_forecast_weather_details": {
+      "cloudiness": "Nébulosité",
+      "atmospheric_pressure": "Pression atmosphérique",
+      "hPa": "hPa",
+      "min_daily": "Minimum"
+    },
+    "current_second_forecast_weather_details": {
+      "humidity": "Humidité",
+      "wind_speed": "Vitesse du vent",
+      "meter_sec": "mètre/sec",
+      "miles_hour": "miles/heure",
+      "max_daily": "Maximum"
+    }
+  },
+  "images": {
+    "alt_current_weather_icon": "Icône de la météo actuelle",
+    "alt_week_day_weather_icon": "Icône de la météo du jour de la semaine"
+  },
+  "errors": {
+    "geo_not_supported": "La géolocalisation n'est pas prise en charge par votre navigateur.",
+    "failed_to_load_current_weather_forecast": "Échec du chargement des données de prévisions météorologiques actuelles !",
+    "failed_to_load_current_week_days_weather_forecast": "Échec du chargement des données de prévisions météorologiques pour la semaine en cours !"
+  },
+  "days_of_week": {
+    "full_name_of_the_days_of_the_week": {
+      "sunday": "Dimanche",
+      "monday": "Lundi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi",
+      "thursday": "Jeudi",
+      "friday": "Vendredi",
+      "saturday": "Samedi"
+    },
+    "short_name_of_the_days_of_the_week": {
+      "sun": "DIM",
+      "mon": "LUN",
+      "tue": "MAR",
+      "wed": "MER",
+      "thu": "JEU",
+      "fri": "VEN",
+      "sat": "SAM"
+    }
+  }
+}
