@@ -1,5 +1,6 @@
 import { FC, useState, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
+import { useScreenOrientation } from "./hooks/useScreenOrientation";
 import { RootState } from "./store/store";
 import { getLocation } from "./utils/getLocation";
 import { adjustAppContainerHeight } from "./utils/adjustAppContainerHeight";
@@ -21,11 +22,22 @@ const App: FC = () => {
   const { showSidebar } = useAppSelector(
     (state: RootState) => state.showSidebarReducer
   );
-  const { errorCurrentForecastWeather } = useAppSelector(
-    (state: RootState) => state.currentForecastWeather
+  const {
+    currentForecastWeather,
+    isLoadingCurrentForecastWeather,
+    errorCurrentForecastWeather,
+  } = useAppSelector((state: RootState) => state.currentForecastWeather);
+  const {
+    currentWeekDaysForecastWeather,
+    isLoadingCurrentWeekDaysForecastWeather,
+    errorCurrentWeekDaysForecastWeather,
+  } = useAppSelector(
+    (state: RootState) => state.currentWeekDaysForecastWeatherReducer
   );
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
   const appContainerRef = useRef<HTMLDivElement>(null);
+  const sidebarToggleRef = useRef<HTMLDivElement>(null);
+  const orientation = useScreenOrientation();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -38,7 +50,17 @@ const App: FC = () => {
 
   useEffect(() => {
     return adjustAppContainerHeight(appContainerRef);
-  }, []);
+  }, [
+    isLoadingCurrentForecastWeather,
+    isLoadingCurrentWeekDaysForecastWeather,
+    showSidebar,
+    currentForecastWeather,
+    currentWeekDaysForecastWeather,
+    error,
+    errorCurrentForecastWeather,
+    errorCurrentWeekDaysForecastWeather,
+    orientation,
+  ]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,8 +76,49 @@ const App: FC = () => {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    const landscape =
+      orientation === "landscape-primary" ||
+      orientation === "landscape-secondary";
+
+    if (landscape && showSidebar) {
+      window.scrollTo({
+        left: 0,
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [orientation, showSidebar]);
+
   const toggleSidebar = () => {
     dispatch(setShowSidebar(!showSidebar));
+  };
+
+  const handleTouchStart: React.TouchEventHandler<HTMLDivElement> = (event) => {
+    const startY = event.touches[0].clientY;
+    const startX = event.touches[0].clientX;
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const moveY = moveEvent.touches[0].clientY;
+      const moveX = moveEvent.touches[0].clientX;
+      const deltaY = moveY - startY;
+      const deltaX = moveX - startX;
+
+      if (
+        sidebarToggleRef.current &&
+        sidebarToggleRef.current.contains(moveEvent.target as Node)
+      ) {
+        if (deltaY < -40 && Math.abs(deltaY) > Math.abs(deltaX)) {
+          dispatch(setShowSidebar(true));
+          window.removeEventListener("touchmove", handleTouchMove);
+        } else if (deltaY > 40 && Math.abs(deltaY) > Math.abs(deltaX)) {
+          dispatch(setShowSidebar(false));
+          window.removeEventListener("touchmove", handleTouchMove);
+        }
+      }
+    };
+
+    window.addEventListener("touchmove", handleTouchMove);
   };
 
   return (
@@ -64,22 +127,24 @@ const App: FC = () => {
         <Header />
         <main>
           {error ? (
-            <h1 className="my-y text-xl lg:my-10 lg:text-2xl ">{error}</h1>
+            <h1 className="my-y text-xl lg:my-10 lg:text-2xl">{error}</h1>
           ) : (
             <>
               <CurrentForecastWeatherSection />
               {!showSidebar && <WeekDaysForecastWeatherSection />}
+              <div
+                ref={sidebarToggleRef}
+                className={`sidebar-toggle ${
+                  errorCurrentForecastWeather && "hidden"
+                } lg:hidden ${showSidebar && "open"}`}
+                onClick={toggleSidebar}
+                onTouchStart={handleTouchStart}
+              >
+                <FontAwesomeIcon icon={faAngleDoubleUp} size="lg" />
+              </div>
+              <Sidebar />
             </>
           )}
-          <div
-            className={`sidebar-toggle ${
-              errorCurrentForecastWeather && "hidden"
-            } lg:hidden ${showSidebar && "open"}`}
-            onClick={toggleSidebar}
-          >
-            <FontAwesomeIcon icon={faAngleDoubleUp} />
-          </div>
-          <Sidebar />
         </main>
       </div>
     </div>

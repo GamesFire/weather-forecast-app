@@ -2,35 +2,46 @@ import { RefObject } from "react";
 
 export function adjustAppContainerHeight(
   appContainerRef: RefObject<HTMLDivElement> | null
-): () => void {
-  function handleResize() {
-    if (!appContainerRef || !appContainerRef.current) {
-      return undefined;
-    }
+) {
+  if (!appContainerRef || !appContainerRef.current) {
+    return;
+  }
 
-    const roleAttribute = appContainerRef.current.getAttribute("role");
+  const roleAttribute = appContainerRef.current.getAttribute("role");
 
-    if (roleAttribute !== "app-container") {
-      console.error("Invalid app container reference provided.");
-      return undefined;
-    }
+  if (roleAttribute !== "app-container") {
+    console.error("Invalid app container reference provided.");
+    return;
+  }
 
-    const windowHeight = window.innerHeight;
-    const contentHeight = appContainerRef.current.scrollHeight;
-    const hasVerticalScrollbar = contentHeight > windowHeight;
+  const screenHeight = window.screen.height;
+  const orientation = window.screen.orientation.type;
+  const portrait =
+    orientation === "portrait-primary" || orientation === "portrait-secondary";
+  const landscape =
+    orientation === "landscape-primary" ||
+    orientation === "landscape-secondary";
+  const windowHeight = window.innerHeight;
+  const maxContentHeight = 850;
+  const contentHeight = appContainerRef.current.scrollHeight;
 
-    if (hasVerticalScrollbar) {
-      appContainerRef.current.classList.remove("h-screen");
+  appContainerRef.current.classList.remove("h-full", "h-screen");
+
+  if (portrait) {
+    if (contentHeight > maxContentHeight || screenHeight < 600) {
       appContainerRef.current.classList.add("h-full");
     } else {
-      appContainerRef.current.classList.remove("h-full");
       appContainerRef.current.classList.add("h-screen");
     }
   }
 
-  handleResize();
+  if (landscape) {
+    if (contentHeight > windowHeight) {
+      appContainerRef.current.classList.add("h-full");
+    } else {
+      appContainerRef.current.classList.add("h-screen");
+    }
+  }
 
-  const intervalId = setInterval(handleResize, 500);
-
-  return () => clearInterval(intervalId);
+  return;
 }

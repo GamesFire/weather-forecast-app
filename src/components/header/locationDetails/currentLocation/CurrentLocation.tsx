@@ -129,6 +129,8 @@ const CurrentLocation: FC = () => {
             closeMenuOnSelect={true}
             maxMenuHeight={100}
             hideSelectedOptions={true}
+            onMenuOpen={() => (document.body.style.overflow = "hidden")}
+            onMenuClose={() => document.body.removeAttribute("style")}
           />
         </div>
       )}

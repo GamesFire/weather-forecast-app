@@ -1,7 +1,7 @@
 {
   "name": "Weather Forecast App",
   "short_name": "WApp",
-  "start_url": "/",
+  "start_url": "https://papaya-choux-42f597.netlify.app",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",

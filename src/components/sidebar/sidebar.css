@@ -3,17 +3,31 @@
 }
 
 .sidebar.open {
-  @apply h-[30%];
+  @apply h-[30%] landscape:static;
 }
 
 .sidebar-toggle {
-  @apply fixed bottom-0 left-1/2 z-50 cursor-pointer;
+  @apply fixed bottom-0 left-1/2 z-50 cursor-pointer transition-[bottom] duration-300 ease-in-out;
 }
 
 .sidebar-toggle.open {
-  @apply bottom-[30%] rotate-180;
+  @apply bottom-[30%] landscape:static landscape:z-0 landscape:mt-10 rotate-180;
 }
 
 .sidebar-content {
   @apply flex flex-col justify-center items-center p-3;
+}
+
+@media (max-height: 600px) {
+  .sidebar.open {
+    @apply static h-auto;
+  }
+
+  .sidebar-toggle {
+    @apply transition-none;
+  }
+
+  .sidebar-toggle.open {
+    @apply static mt-10;
+  }
 }
