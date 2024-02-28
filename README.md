@@ -8,7 +8,7 @@ This is a weather forecasting web application built with React, TypeScript, and 
 
 ## DEMO Version
 
-Check out the DEMO version of the web application on Netlify: [WApp Netlify DEMO](https://weather-forecast-app-by-lobix.netlify.app/).
+Check out the DEMO version of the web application on Netlify: [WApp Netlify DEMO](https://papaya-choux-42f597.netlify.app).
 
 ## Features
 
