@@ -1,12 +1,15 @@
 import { Units } from "@/types/units";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 interface CurrentUnitsState {
   currentUnits: Units;
 }
 
+const defaultUnits = (Cookies.get("units") || "metric") as Units;
+
 const initialState: CurrentUnitsState = {
-  currentUnits: "metric",
+  currentUnits: defaultUnits,
 };
 
 export const currentUnitsSlice = createSlice({

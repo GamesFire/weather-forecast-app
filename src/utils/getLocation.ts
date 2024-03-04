@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import { Dispatch } from "redux";
 import type { RootState } from "@/store/store";
+import type { ILocation } from "@/store/models/ILocation";
 import { store } from "@/main";
 import { fetchLocation } from "@/api/fetchLocation";
 import { setCurrentGeolocation } from "@/store/reducers/slices/currentGeolocationSlice";
@@ -8,7 +9,8 @@ import { setCurrentGeolocation } from "@/store/reducers/slices/currentGeolocatio
 export const getLocation = async (dispatch: Dispatch): Promise<void> => {
   return new Promise<void>((resolve, reject) => {
     const state: RootState = store.getState();
-    const { countryCode, city } = state.currentGeolocationReducer;
+    const { countryCode, city, latitude, longitude } =
+      state.currentGeolocationReducer;
 
     if (!countryCode || !city) {
       dispatch(
@@ -25,29 +27,43 @@ export const getLocation = async (dispatch: Dispatch): Promise<void> => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { currentLanguage } = state.currentLanguageReducer;
-          const { latitude, longitude } = position.coords;
+          const { latitude: positionLatitude, longitude: positionLongitude } =
+            position.coords;
 
           try {
-            const response = await fetchLocation({
-              latitude,
-              longitude,
-              namePrefix: null,
-              languageCode: currentLanguage,
-            });
+            let response: ILocation | undefined;
 
-            const countryCode =
+            if (!latitude || !longitude) {
+              response = await fetchLocation({
+                latitude: positionLatitude,
+                longitude: positionLongitude,
+                namePrefix: null,
+                languageCode: currentLanguage,
+              });
+            } else {
+              response = await fetchLocation({
+                latitude,
+                longitude,
+                namePrefix: null,
+                languageCode: currentLanguage,
+              });
+            }
+
+            const newCountryCode =
               response?.data[0]?.countryCode ??
               i18next.t("header.location.country_code_unknown");
-            const city =
+            const newCity =
               response?.data[0]?.city ??
               i18next.t("header.location.city_unknown");
+            const newLatitude = response?.data[0].latitude ?? null;
+            const newLongitude = response?.data[0].longitude ?? null;
 
             dispatch(
               setCurrentGeolocation({
-                countryCode,
-                city,
-                latitude,
-                longitude,
+                countryCode: newCountryCode,
+                city: newCity,
+                latitude: newLatitude,
+                longitude: newLongitude,
               })
             );
 
